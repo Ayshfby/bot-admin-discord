@@ -87,6 +87,12 @@ async def start(ctx):
     await ctx.send("Hi! I'm a chat manager bot!")
 
 @bot.event
+async def on_member_join(member):
+    # Mengirim pesan ucapan selamat
+    for channel in member.guild.text_channels:
+        await channel.send(f'Selamat datang, {member.mention}!')
+
+@bot.event
 async def on_message(message: discord.Message):
     if message.author.bot or not isinstance(message.author, discord.Member):
         await bot.process_commands(message)
